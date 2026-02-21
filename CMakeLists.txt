@@ -6,9 +6,11 @@ enable_testing()
 add_subdirectory(oatpp)
 add_subdirectory(googletest)
 add_subdirectory(src)
+add_subdirectory(lib)
 add_subdirectory(tests)
 target_link_libraries(Linreg PRIVATE oatpp)
 target_include_directories(Linreg PRIVATE include)
+target_include_directories(regression PRIVATE include)
 target_include_directories(TestRunner PRIVATE include)
 add_test(
 	NAME linreg
