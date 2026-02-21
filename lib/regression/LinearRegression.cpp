@@ -1,5 +1,6 @@
+#include <iostream>
 #include <algorithm>
-#include <linreg/structures//Vector.hpp>
+#include <linreg/structures/Vector.hpp>
 #include <linreg/regression/LinearRegression.hpp>
 
 void linreg::regression::LinearRegression::CalcB1() {
@@ -28,4 +29,30 @@ const linreg::structures::Vector<double> linreg::regression::LinearRegression::C
 	});
 
 	return result;
+}
+
+linreg::structures::Vector<double> linreg::regression::LinearRegression::CalcValsHat() {
+	structures::Vector<double> res(this->args.size());
+	std::transform(this->args.begin(),this->args.end(),res.begin(),[this](double el) {
+		return this->valsMean + this->b1 * (el - this->argsMean);
+	});
+
+	return res;
+}
+
+double linreg::regression::LinearRegression::CalcError() {
+	double ssr = 0;
+	double sse = 0;
+		
+	std::for_each(this->valsHat.begin(),this->valsHat.end(),[this,&ssr](double el) {
+		ssr += (el - this->valsMean) * (el - this->valsMean);
+	});
+
+	for(uint32_t i = 0; i < this->vals.size(); i++) {
+		sse += (this->vals[i] - this->valsHat[i]) * (this->vals[i] - this->valsHat[i]);
+	}
+
+	double sst = ssr + sse;
+
+	return sse / sst;
 }
