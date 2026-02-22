@@ -1,5 +1,7 @@
 #pragma once
 
+#include <iostream>
+#include <limits>
 #include <cstdint>
 #include <concepts>
 
@@ -15,6 +17,22 @@ T fact(T x) {
 	uint32_t i = 1;
 	while(i <= x) {
 		res *= i++;
+	}
+
+	return res;
+}
+
+template <typename T>
+requires Numerical<T>
+T exp(T x) {
+	T res = std::numeric_limits<T>::denorm_min();
+
+	T lastVal = 1;
+	T lastFact = 1; 
+	for(uint32_t i = 0; i < 10; i++) {
+		res += lastVal / lastFact;
+		lastVal *= x;
+		lastFact = fact(i+1);
 	}
 
 	return res;
