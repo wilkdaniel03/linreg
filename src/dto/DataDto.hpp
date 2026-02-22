@@ -6,6 +6,9 @@
 #include OATPP_CODEGEN_BEGIN(DTO)
 
 class DataDto : public oatpp::DTO {
+	DTO_INIT(DataDto,DTO)
+	DTO_FIELD(Vector<Float64>,args);
+	DTO_FIELD(Vector<Float64>,vals);
 };
 
 #include OATPP_CODEGEN_END(DTO)
