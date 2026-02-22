@@ -7,6 +7,7 @@
 #include <oatpp/network/Server.hpp>
 
 #include "StatusHandler.cpp"
+#include "ComputeHandler.cpp"
 
 namespace http = oatpp::web::server;
 namespace net = oatpp::network;;
@@ -16,6 +17,7 @@ const uint16_t PORT = 8080;
 int main(void) {
 	auto router = http::HttpRouter::createShared();
 	router->route("GET","/status",std::make_shared<StatusHandler>());
+	router->route("POST","/compute",std::make_shared<ComputeHandler>());
 	auto connHandler = http::HttpConnectionHandler::createShared(router);
 	auto connProvider = net::tcp::server::ConnectionProvider::createShared({"127.0.0.1",PORT,net::Address::IP_4});
 	auto server = net::Server(connProvider,connHandler);

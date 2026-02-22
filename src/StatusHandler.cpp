@@ -3,7 +3,8 @@
 #include <oatpp/web/protocol/http/outgoing/Request.hpp>
 #include <oatpp/web/protocol/http/incoming/Response.hpp>
 #include <oatpp/parser/json/mapping/ObjectMapper.hpp>
-#include <linreg/dto/MessageDto.hpp>
+
+#include "dto/MessageDto.hpp"
 
 namespace http = oatpp::web::server;
 namespace proto = oatpp::web::protocol::http;
