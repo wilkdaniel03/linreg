@@ -11,7 +11,7 @@
 namespace http = oatpp::web::server;
 namespace net = oatpp::network;;
 
-const uint32_t PORT = 8080;
+const uint16_t PORT = 8080;
 
 int main(void) {
 	auto router = http::HttpRouter::createShared();
@@ -21,5 +21,6 @@ int main(void) {
 	auto server = net::Server(connProvider,connHandler);
 	std::cout << std::format("Listenning on port {}...",PORT) << std::endl;
 	server.run();
+
 	return 0;
 }
