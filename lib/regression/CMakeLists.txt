@@ -1,1 +1,1 @@
-add_library(regression SHARED LinearRegression.cpp)
+add_library(linreg_regression SHARED LinearRegression.cpp)
